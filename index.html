@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Sahara</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Accessibility Bar -->
+    <div class="accessibility-bar">
+        <div class="text-size">
+            <button onclick="adjustTextSize(1)">A+</button>
+            <button onclick="adjustTextSize(-1)">A-</button>
+        </div>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="navbar">
+        <a href="#home" class="logo">
+            <img src="logo.png" style="height: 65px; width: 90px;">
+            <span class="logo-text"></span>
+        </a>
+        <div class="nav-links">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#features" class="nav-link">Services</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+ 
+    <section id="home">
+        <div class="hero-text">
+            <h1>Welcome to E-Sahara</h1>
+            <p>Your trusted partner in senior care and support services</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <div>
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <img src="image.jpg" alt="Happy seniors" class="about-image">
+                <div>
+                    <p>We are the nobel solution for the problem of lonliness.</p>
+                    <p>We  provide personalized care plans tailored to each individual's needs and tackling down lonliness.</p>
+                    <a href="#" class="learn-more-btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="features-container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="features-grid">
+                <!-- Card 1 -->
+                <div class="feature-card">
+                    <div class="feature-card-content">
+                        <i class="fas fa-heartbeat feature-icon"></i>
+                        <h3>Health Monitoring Dashboard</h3>
+                        <p>24/7 health tracking and support</p>
+                        <div class="feature-description">
+                            <p>Our comprehensive health monitoring system includes regular check-ups, medication management, and emergency response services to ensure your well-being at all times.</p>
+                        </div>
+                    </div>
+                    <div class="learn-more-btn-container">
+                        <a href="#" class="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="feature-card">
+                    <div class="feature-card-content">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h3>Social Activities</h3>
+                        <p>Weekly social gatherings and hobby clubs</p>
+                        <div class="feature-description">
+                            <p>We organize weekly social gatherings, hobby clubs, and cultural outings to keep you engaged and connected with your community.</p>
+                        </div>
+                    </div>
+                    <div class="learn-more-btn-container">
+                        <a href="#" class="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="feature-card">
+                    <div class="feature-card-content">
+                        <i class="fas fa-home feature-icon"></i>
+                        <h3>Home Care</h3>
+                        <p>Professional in-home services</p>
+                        <div class="feature-description">
+                            <p>Our trained caregivers provide assistance with daily activities, housekeeping, meal preparation, and personal care in the comfort of your home.</p>
+                        </div>
+                    </div>
+                    <div class="learn-more-btn-container">
+                        <a href="#" class="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="feature-card">
+                    <div class="feature-card-content">
+                        <i class="fas fa-utensils feature-icon"></i>
+                        <h3>Charitable feast</h3>
+                        <p>For elderly people having cooking as hobby.</p>
+                        <div class="feature-description">
+                            <p>We organize social gathering where we invite needy people and other elderly people those who loves cooking and feeding.</p>
+                        </div>
+                    </div>
+                    <div class="learn-more-btn-container">
+                        <a href="#" class="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="feature-card">
+                    <div class="feature-card-content">
+                        <i class="fas fa-car feature-icon"></i>
+                        <h3>Outings</h3>
+                        <p>Safe and reliable rides</p>
+                        <div class="feature-description">
+                            <p>Door-to-door transportation services for medical camps, shopping, and social events with wheelchair-accessible vehicles.</p>
+                        </div>
+                    </div>
+                    <div class="learn-more-btn-container">
+                        <a href="#" class="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="feature-card">
+                    <div class="feature-card-content">
+                        <i class="fas fa-hands-helping feature-icon"></i>
+                        <h3>Personal Assistance</h3>
+                        <p>One-on-one support</p>
+                        <div class="feature-description">
+                            <p>Personal assistants to help with errands, paperwork, technology assistance, and other daily needs and also 1:1 session.</p>
+                        </div>
+                    </div>
+                    <div class="learn-more-btn-container">
+                        <a href="#" class="learn-more-btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div>
+            <h2 class="section-title">Contact Us</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <a href="#home"><i class="fas fa-home"></i></a>
+        <a href="#about"><i class="fas fa-info-circle"></i></a>
+        <a href="#features"><i class="fas fa-list-alt"></i></a>
+        <a href="#contact"><i class="fas fa-phone"></i></a>
+    </nav>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-heading">E-Sahara</h3>
+                <p>Your trusted partner in senior care</p>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-heading">Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Knowledge park 2, greater noida</p>
+                <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                <p><i class="fas fa-envelope"></i> info@esahara.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 E-Sahara. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js">
+
+
+    </script>
+</body>
+</html>
