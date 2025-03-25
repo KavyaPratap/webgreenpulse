@@ -43,116 +43,125 @@
             <h2 class="section-title">About Us</h2>
             <div class="about-content">
                 <img src="image.jpg" alt="Happy seniors" class="about-image">
-                <div>
-                    <p>We are the nobel solution for the problem of lonliness.</p>
-                    <p>We  provide personalized care plans tailored to each individual's needs and tackling down lonliness.</p>
-                    <a href="#" class="learn-more-btn">Learn More</a>
+                <div class="about-text">
+                    <p class="visible-text">We are the nobel solution for the problem of lonliness.</p>
+                    <p>We provide personalized care plans tailored to each individual's needs and tackling down lonliness.</p>
+                    <div class="aim-container">
+                        <h3 class="aim-heading">Our Aim</h3>
+                        <div class="aim-content">
+                            <p>To combat elderly loneliness through:</p>
+                            <ul>
+                                <li>Intergenerational digital connections</li>
+                                <li>Meaningful social interactions</li>
+                                <li>Community-building activities</li>
+                                <li>Mental well-being programs</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="collapsible-text">
+                        <!-- add about us in grid layout with field visit image-->
+                        <div class="who-we-are">
+                            <h3 class="who-heading">Who We Are</h3>
+                            <div class="who-content">
+                                <p>We are engineering students from NIET committed to solving elderly loneliness through innovative solutions.</p>
+                                <p>We address this critical issue by:</p>
+                                <ul>
+                                    <li>Developing technology to connect generations</li>
+                                    <li>Creating platforms for meaningful engagement</li>
+                                    <li>Building communities that foster relationships</li>
+                                    <li>Designing programs to enhance mental well-being</li>
+                                </ul>
+                            </div>
+                            <a href="team.html" class="meet-team-btn">Meet Our Team</a>
+                        </div>
+                    </div>
+                    <button class="learn-more-btn about-show-more">
+                        Show More <i class="fas fa-chevron-down"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
-
-    <section id="features">
-        <div class="features-container">
-            <h2 class="section-title">Our Services</h2>
-            <div class="features-grid">
-                <!-- Card 1 -->
-                <div class="feature-card">
-                    <div class="feature-card-content">
-                        <i class="fas fa-heartbeat feature-icon"></i>
-                        <h3>Health Monitoring Dashboard</h3>
-                        <p>24/7 health tracking and support</p>
-                        <div class="feature-description">
-                            <p>Our comprehensive health monitoring system includes regular check-ups, medication management, and emergency response services to ensure your well-being at all times.</p>
-                        </div>
-                    </div>
-                    <div class="learn-more-btn-container">
-                        <a href="#" class="learn-more-btn">Learn More</a>
-                    </div>
+   <!-- In your HTML file -->
+<section id="features">
+    <div class="features-container">
+        <h2 class="section-title">Our Services</h2>
+        <div class="features-grid">
+            <!-- First 3 services (always visible) -->
+            <div class="feature-card">
+                <i class="fas fa-heartbeat feature-icon"></i>
+                <h3>Health Monitoring</h3>
+                <p>24/7 health tracking and support</p>
+                <div class="feature-description">
+                    <p>Our comprehensive health monitoring system includes regular check-ups, medication management, and emergency response services.</p>
                 </div>
+                <a href="#" class="learn-more-btn">Learn More</a>
+            </div>
 
-                <!-- Card 2 -->
-                <div class="feature-card">
-                    <div class="feature-card-content">
-                        <i class="fas fa-users feature-icon"></i>
-                        <h3>Social Activities</h3>
-                        <p>Weekly social gatherings and hobby clubs</p>
-                        <div class="feature-description">
-                            <p>We organize weekly social gatherings, hobby clubs, and cultural outings to keep you engaged and connected with your community.</p>
-                        </div>
-                    </div>
-                    <div class="learn-more-btn-container">
-                        <a href="#" class="learn-more-btn">Learn More</a>
-                    </div>
+            <div class="feature-card">
+                <i class="fas fa-users feature-icon"></i>
+                <h3>Social Activities</h3>
+                <p>Community events and activities</p>
+                <div class="feature-description">
+                    <p>We organize weekly social gatherings, hobby clubs, and cultural outings to keep you engaged.</p>
                 </div>
+                <a href="#" class="learn-more-btn">Learn More</a>
+            </div>
 
-                <!-- Card 3 -->
-                <div class="feature-card">
-                    <div class="feature-card-content">
-                        <i class="fas fa-home feature-icon"></i>
-                        <h3>Home Care</h3>
-                        <p>Professional in-home services</p>
-                        <div class="feature-description">
-                            <p>Our trained caregivers provide assistance with daily activities, housekeeping, meal preparation, and personal care in the comfort of your home.</p>
-                        </div>
-                    </div>
-                    <div class="learn-more-btn-container">
-                        <a href="#" class="learn-more-btn">Learn More</a>
-                    </div>
+            <div class="feature-card">
+                <i class="fas fa-home feature-icon"></i>
+                <h3>Home Care</h3>
+                <p>Professional in-home services</p>
+                <div class="feature-description">
+                    <p>Our trained caregivers provide assistance with daily activities, housekeeping, and personal care.</p>
                 </div>
+                <a href="#" class="learn-more-btn">Learn More</a>
+            </div>
 
-                <!-- Card 4 -->
-                <div class="feature-card">
-                    <div class="feature-card-content">
-                        <i class="fas fa-utensils feature-icon"></i>
-                        <h3>Charitable feast</h3>
-                        <p>For elderly people having cooking as hobby.</p>
-                        <div class="feature-description">
-                            <p>We organize social gathering where we invite needy people and other elderly people those who loves cooking and feeding.</p>
-                        </div>
-                    </div>
-                    <div class="learn-more-btn-container">
-                        <a href="#" class="learn-more-btn">Learn More</a>
-                    </div>
+            <!-- Additional services (hidden by default) -->
+            <div class="feature-card collapsible">
+                <i class="fas fa-utensils feature-icon"></i>
+                <h3>Meal Services</h3>
+                <p>Nutritious meal delivery</p>
+                <div class="feature-description">
+                    <p>We provide balanced, dietitian-approved meals delivered to your door.</p>
                 </div>
+                <a href="#" class="learn-more-btn">Learn More</a>
+            </div>
 
-                <!-- Card 5 -->
-                <div class="feature-card">
-                    <div class="feature-card-content">
-                        <i class="fas fa-car feature-icon"></i>
-                        <h3>Outings</h3>
-                        <p>Safe and reliable rides</p>
-                        <div class="feature-description">
-                            <p>Door-to-door transportation services for medical camps, shopping, and social events with wheelchair-accessible vehicles.</p>
-                        </div>
-                    </div>
-                    <div class="learn-more-btn-container">
-                        <a href="#" class="learn-more-btn">Learn More</a>
-                    </div>
+            <div class="feature-card collapsible">
+                <i class="fas fa-car feature-icon"></i>
+                <h3>Transportation</h3>
+                <p>Safe and reliable rides</p>
+                <div class="feature-description">
+                    <p>Door-to-door transportation services for medical appointments and social events.</p>
                 </div>
+                <a href="#" class="learn-more-btn">Learn More</a>
+            </div>
 
-                <!-- Card 6 -->
-                <div class="feature-card">
-                    <div class="feature-card-content">
-                        <i class="fas fa-hands-helping feature-icon"></i>
-                        <h3>Personal Assistance</h3>
-                        <p>One-on-one support</p>
-                        <div class="feature-description">
-                            <p>Personal assistants to help with errands, paperwork, technology assistance, and other daily needs and also 1:1 session.</p>
-                        </div>
-                    </div>
-                    <div class="learn-more-btn-container">
-                        <a href="#" class="learn-more-btn">Learn More</a>
-                    </div>
+            <div class="feature-card collapsible">
+                <i class="fas fa-hands-helping feature-icon"></i>
+                <h3>Personal Assistance</h3>
+                <p>One-on-one support</p>
+                <div class="feature-description">
+                    <p>Personal assistants to help with errands, paperwork, and technology assistance.</p>
                 </div>
+                <a href="#" class="learn-more-btn">Learn More</a>
             </div>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div>
-            <h2 class="section-title">Contact Us</h2>
+        
+        <!-- Show More/Less Button -->
+        <div class="show-more-container">
+            <button id="show-more-btn" class="learn-more-btn">
+                Show More <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+    </div>
+</section>
+<section id="contact">
+    <div>
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
             <form class="contact-form">
                 <div class="form-group">
                     <input type="text" placeholder="Your Name" required>
@@ -165,9 +174,18 @@
                 </div>
                 <button type="submit" class="submit-btn">Send Message</button>
             </form>
+            
+            <div class="contact-buttons">
+                <button class="action-btn" id="collaborate-btn">
+                    Collaborate With Us
+                </button>
+                <button class="action-btn" id="join-us-btn">
+                    Join Us
+                </button>
+            </div>
         </div>
-    </section>
-
+    </div>
+</section>
     <!-- Mobile Navigation -->
     <nav class="mobile-nav">
         <a href="#home"><i class="fas fa-home"></i></a>
@@ -180,6 +198,14 @@
             <div class="footer-section">
                 <h3 class="footer-heading">E-Sahara</h3>
                 <p>Your trusted partner in senior care</p>
+                <!-- Social Media Handles -->
+                <div class="social-media">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                </div>
             </div>
             <div class="footer-section">
                 <h3 class="footer-heading">Quick Links</h3>
@@ -192,7 +218,7 @@
             </div>
             <div class="footer-section">
                 <h3 class="footer-heading">Contact Info</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Knowledge park 2, greater noida</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Care Street, City</p>
                 <p><i class="fas fa-phone"></i> (123) 456-7890</p>
                 <p><i class="fas fa-envelope"></i> info@esahara.com</p>
             </div>
