@@ -607,7 +607,7 @@ input:focus, textarea:focus {
 }
 
 .collapsible-text.visible {
-    max-height: 600px; 
+    max-height: 500px; 
 }
 
 .about-show-more {
