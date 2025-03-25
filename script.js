@@ -54,3 +54,26 @@
             }
         }
     });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const text = "Welcome to E-Sahara";
+    const speed = 100; 
+    const typewriterElement = document.querySelector('.typewriter-text');
+    
+    if (typewriterElement) {
+        let i = 0;
+        typewriterElement.textContent = ''; 
+        
+        function typeWriter() {
+            if (i < text.length) {
+                typewriterElement.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                typewriterElement.style.borderRight = '.15em solid var(--gold1)';
+            }
+        }
+       
+        setTimeout(typeWriter, 500);
+    }
+});
