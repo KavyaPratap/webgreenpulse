@@ -85,3 +85,74 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(typeWriter, startDelay);
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const collapsibleCards = document.querySelectorAll('.feature-card.collapsible');
+    
+    if (showMoreBtn && collapsibleCards.length > 0) {
+        showMoreBtn.addEventListener('click', function() {
+            const isExpanded = this.classList.toggle('expanded');
+            
+            // Toggle visibility
+            collapsibleCards.forEach(card => {
+                card.classList.toggle('visible');
+            });
+            
+            // Update button text
+            this.innerHTML = isExpanded 
+                ? 'Show Less <i class="fas fa-chevron-up"></i>' 
+                : 'Show More <i class="fas fa-chevron-down"></i>';
+        });
+    }
+});
+
+// About Section Show More
+document.querySelectorAll('.about-show-more').forEach(button => {
+    button.addEventListener('click', function() {
+        const collapsibleText = this.parentElement.querySelector('.collapsible-text');
+        const isExpanded = collapsibleText.classList.toggle('visible');
+        
+        this.classList.toggle('expanded');
+        this.innerHTML = isExpanded 
+            ? 'Show Less <i class="fas fa-chevron-up"></i>' 
+            : 'Show More <i class="fas fa-chevron-down"></i>';
+    });
+});
+
+// Modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Get modal elements
+    const collaborateBtn = document.getElementById('collaborate-btn');
+    const joinUsBtn = document.getElementById('join-us-btn');
+    const collaborateModal = document.getElementById('collaborate-modal');
+    const joinUsModal = document.getElementById('join-us-modal');
+    const closeButtons = document.querySelectorAll('.close-modal');
+    
+    // Open modals
+    if (collaborateBtn) {
+        collaborateBtn.addEventListener('click', function() {
+            collaborateModal.style.display = 'block';
+        });
+    }
+    
+    if (joinUsBtn) {
+        joinUsBtn.addEventListener('click', function() {
+            joinUsModal.style.display = 'block';
+        });
+    }
+    
+    // Close modals
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            this.closest('.modal').style.display = 'none';
+        });
+    });
+    
+    // Close when clicking outside modal
+    window.addEventListener('click', function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = 'none';
+        }
+    });
+});
