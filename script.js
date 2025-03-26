@@ -149,10 +149,161 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Close when clicking outside modal
     window.addEventListener('click', function(event) {
         if (event.target.classList.contains('modal')) {
             event.target.style.display = 'none';
         }
     });
 });
+// Chatbot functionality
+let isChatOpen = false;
+const faqResponses = {
+    "services": "We offer 6 core services: Health Monitoring, Social Activities, Home Care, Meal Services, Transportation, and Personal Assistance. You can find details in our Services section.",
+    "contact": "You can reach us via phone at (123) 456-7890 or email at info@esahara.com. Our office is located at 123 Care Street, City.",
+    "hours": "Our support team is available 24/7. Office hours are Mon-Fri 9AM-5PM.",
+    "team": "We're engineering students from NIET passionate about elderly care. Meet our team here: [team.html]",
+    "default": "I'm here to help with common questions about our services, contact info, hours, and team. Feel free to ask anything!"
+};
+
+function toggleChat() {
+    const chat = document.getElementById('chatbot-container');
+    isChatOpen = !isChatOpen;
+    chat.classList.toggle('chatbot-hidden');
+}
+
+function sendMessage() {
+    const input = document.getElementById('user-input');
+    const messages = document.getElementById('chat-messages');
+    const userText = input.value.trim().toLowerCase();
+
+    if (!userText) return;
+
+    messages.innerHTML += `
+        <div class="message user-message">
+            ${userText}
+        </div>
+    `;
+
+    const response = getBotResponse(userText);
+    messages.innerHTML += `
+        <div class="message bot-message">
+            ${response}
+        </div>
+    `;
+
+    input.value = '';
+    messages.scrollTop = messages.scrollHeight;
+}
+
+function getBotResponse(input) {
+    if (input.includes('service')) return faqResponses.services;
+    if (input.includes('contact') || input.includes('email')) return faqResponses.contact;
+    if (input.includes('hour') || input.includes('time')) return faqResponses.hours;
+    if (input.includes('team') || input.includes('who')) return faqResponses.team;
+    return faqResponses.default;
+}
+
+// Handle Enter key
+document.getElementById('user-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+});
+
+
+  async function sendMessage() {
+  const input = document.getElementById('user-input');
+  const userText = input.value.trim();
+  if (!userText) return;
+
+  addMessage(userText, 'user-message');
+
+  const typingIndicator = addMessage('...', 'bot-message typing');
+  
+  await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+  
+  typingIndicator.remove();
+  const response = getBotResponse(userText.toLowerCase());
+  await typeResponse(response);
+}
+
+function addMessage(text, className) {
+  const messages = document.getElementById('chat-messages');
+  const msgDiv = document.createElement('div');
+  msgDiv.className = `message ${className}`;
+  msgDiv.textContent = text;
+  messages.appendChild(msgDiv);
+  messages.scrollTop = messages.scrollHeight;
+  return msgDiv;
+}
+
+async function typeResponse(text) {
+  const messages = document.getElementById('chat-messages');
+  const msgDiv = document.createElement('div');
+  msgDiv.className = 'message bot-message';
+  messages.appendChild(msgDiv);
+
+  for (let i = 0; i < text.length; i++) {
+    await new Promise(resolve => setTimeout(resolve, 35)); 
+    msgDiv.textContent = text.substring(0, i + 1);
+    messages.scrollTop = messages.scrollHeight;
+  }
+}
+
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (window.SpeechRecognition) {
+    const recognition = new window.SpeechRecognition();
+    recognition.continuous = true; 
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    let isVoiceActive = false;
+
+    recognition.addEventListener('result', (event) => {
+        const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase().trim();
+        console.log('Voice command:', transcript);
+
+        if (transcript.includes('end voice navigation')) {
+            recognition.stop();
+            isVoiceActive = false;
+            console.log('Voice navigation deactivated by voice command.');
+            return;
+        }
+
+    
+        if (transcript.includes('home')) {
+            document.querySelector('#home').scrollIntoView({ behavior: 'smooth' });
+        } else if (transcript.includes('about')) {
+            document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+        } else if (transcript.includes('services') || transcript.includes('features')) {
+            document.querySelector('#features').scrollIntoView({ behavior: 'smooth' });
+        } else if (transcript.includes('contact')) {
+            document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+        } else if (transcript.includes('chat')) {
+            toggleChat(); 
+        } else {
+            console.log('Command not recognized:', transcript);
+        }
+    });
+
+    recognition.addEventListener('end', () => {
+     
+        if (isVoiceActive) {
+            recognition.start();
+        }
+    });
+
+    document.getElementById('voice-command-btn').addEventListener('click', () => {
+        if (!isVoiceActive) {
+            isVoiceActive = true;
+            recognition.start();
+            console.log('Voice navigation activated.');
+        } else {
+            isVoiceActive = false;
+            recognition.stop();
+            console.log('Voice navigation deactivated.');
+        }
+    });
+} else {
+    console.log('Speech Recognition API not supported in this browser.');
+}
