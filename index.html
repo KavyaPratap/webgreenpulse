@@ -13,7 +13,14 @@
         <div class="text-size">
             <button onclick="adjustTextSize(1)">A+</button>
             <button onclick="adjustTextSize(-1)">A-</button>
+            <button class="chatbot-toggle" onclick="toggleChat()">
+                <i class="fas fa-comments"></i> Chat
+            </button>
+            <button id="voice-command-btn" class="voice-btn">
+                <i class="fas fa-microphone"></i> Voice Navigation
+            </button>
         </div>
+
     </div>
 
     <!-- Desktop Navigation -->
@@ -82,7 +89,7 @@
             </div>
         </div>
     </section>
-  
+   <!-- In your HTML file -->
 <section id="features">
     <div class="features-container">
         <h2 class="section-title">Our Services</h2>
@@ -227,6 +234,18 @@
             <p>&copy; 2025 E-Sahara. All Rights Reserved.</p>
         </div>
     </footer>
+    <div id="chatbot-container" class="chatbot-hidden">
+    <div class="chat-header">
+        <h3>FAQ Assistant</h3>
+        <button onclick="toggleChat()" class="close-chat">&times;</button>
+    </div>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Ask a question...">
+        <button id="voice-input-btn"><i class="fas fa-microphone"></i></button>
+        <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
     <script src="script.js">
 
 
