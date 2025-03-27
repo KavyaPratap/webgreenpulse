@@ -470,9 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Chatbot functionality (Updated AI Integration)
 let isChatOpen = false;
 let isProcessing = false; // Prevent multiple simultaneous requests
-
-// AI Configuration
-const API_KEY = "AIzaSyBkCDgxrDBR2GrI6y-JKBWXmUkKUnj7Xl0"; // Replace with your API key
+//add api section only...2line of code likh
 
 async function getAIResponse(userMessage) {
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
