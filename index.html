@@ -79,7 +79,7 @@
                                     <li>Designing programs to enhance mental well-being</li>
                                 </ul>
                             </div>
-                            <a href="team.html" class="meet-team-btn">Meet Our Team</a>
+                            <a  class="meet-team-btn">Meet Our Team</a>
                         </div>
                     </div>
                     <button class="learn-more-btn about-show-more">
@@ -89,7 +89,47 @@
             </div>
         </div>
     </section>
-   <!-- In your HTML file -->
+
+<!-- Team Carousel Section (initially hidden) -->
+<section id="team-carousel" style="display: none; opacity: 0;">
+    <h2 class="carousel-title">Our Team</h2>
+    <div class="carousel-wrapper">
+      <div class="carousel-track">
+        <div class="carousel-item active">
+          <img src="team1.jpg" alt="Team Member 1">
+        </div>
+        <div class="carousel-item">
+          <img src="team2.jpg" alt="Team Member 2">
+        </div>
+        <div class="carousel-item">
+          <img src="team3.jpg" alt="Team Member 3">
+        </div>
+        <div class="carousel-item">
+          <img src="team4.jpg" alt="Team Member 4">
+        </div>
+        <div class="carousel-item">
+          <img src="team5.jpg" alt="Team Member 5">
+        </div>
+      </div>
+    </div>
+
+<div class="carousel-description">
+    <p class="active">Kavya Pratap Singh – <br>Student of NIET AIML branch <br>Developed the prototype with his team and is the team lead of Brutecoders.</p>
+    <p>Nikhil Kumar Jha –<br>Student of NIET AIML branch <br>Helped with all the written stuff of our team.</p>
+    <p>Ashu Sharma – <br>Student of NIET AIML branch <br>Helped with providing good ideas.</p>
+    <p>Soumya Jain – <br>Student of NIET AI branch <br>Helped with presenting our idea and suggesting layout of website.</p>
+    <p>Kritika Sharma – <br>Student of NIET IT branch <br>Helped with presentation and ideas.</p>
+  </div>
+
+    <div class="carousel-dots">
+      <span class="dot active" data-index="0"></span>
+      <span class="dot" data-index="1"></span>
+      <span class="dot" data-index="2"></span>
+      <span class="dot" data-index="3"></span>
+      <span class="dot" data-index="4"></span>
+    </div>
+  </section>
+  
 <section id="features">
     <div class="features-container">
         <h2 class="section-title">Our Services</h2>
@@ -157,7 +197,6 @@
             </div>
         </div>
         
-        <!-- Show More/Less Button -->
         <div class="show-more-container">
             <button id="show-more-btn" class="learn-more-btn">
                 Show More <i class="fas fa-chevron-down"></i>
@@ -165,6 +204,10 @@
         </div>
     </div>
 </section>
+
+
+
+
 <section id="contact">
     <div>
         <h2 class="section-title">Contact Us</h2>
@@ -192,6 +235,45 @@
             </div>
         </div>
     </div>
+    <div id="join-us-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <h2>Join Us</h2>
+          <p>Fill in the form below to join our team.</p>
+          <form class="join-form">
+            <div class="form-group">
+              <input type="text" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" placeholder="Email Address" required>
+            </div>
+            <div class="form-group">
+              <textarea rows="5" placeholder="Why do you want to join?" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+          </form>
+        </div>
+      </div> 
+
+<div id="collaborate-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Collaborate With Us</h2>
+      <p>We'd love to hear your ideas! Please fill in the form below to collaborate.</p>
+      <form class="collaborate-form">
+        <div class="form-group">
+          <input type="text" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Email Address" required>
+        </div>
+        <div class="form-group">
+          <textarea rows="5" placeholder="How would you like to collaborate?" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+  </div>
 </section>
     <!-- Mobile Navigation -->
     <nav class="mobile-nav">
@@ -234,18 +316,23 @@
             <p>&copy; 2025 E-Sahara. All Rights Reserved.</p>
         </div>
     </footer>
+
     <div id="chatbot-container" class="chatbot-hidden">
-    <div class="chat-header">
-        <h3>FAQ Assistant</h3>
-        <button onclick="toggleChat()" class="close-chat">&times;</button>
+        <div class="chat-header">
+            <h3>E-Sahara Assistant</h3>
+            <button onclick="toggleChat()" class="close-chat">&times;</button>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Ask a question...">
+            <button id="voice-input-btn" class="voice-btn" title="Voice input">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button onclick="sendMessage()" class="send-btn" title="Send message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
     </div>
-    <div class="chat-messages" id="chat-messages"></div>
-    <div class="chat-input">
-        <input type="text" id="user-input" placeholder="Ask a question...">
-        <button id="voice-input-btn"><i class="fas fa-microphone"></i></button>
-        <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-    </div>
-</div>
     <script src="script.js">
 
 
