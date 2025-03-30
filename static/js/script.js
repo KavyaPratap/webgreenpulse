@@ -216,142 +216,123 @@ document.getElementById('user-input').addEventListener('keypress', async (e) => 
     }
 });
 
-if (window.SpeechRecognition) {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.continuous = true;
-    recognition.lang = 'en-US';
+// ====================== Voice Navigation ======================
+document.addEventListener('DOMContentLoaded', function() {
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-    document.getElementById('voice-command-btn')?.addEventListener('click', () => {
-        recognition[recognition.continuous ? 'stop' : 'start']();
-    });
+    if (window.SpeechRecognition) {
+        const voiceNavRecognition = new window.SpeechRecognition();
+        voiceNavRecognition.continuous = true;
+        voiceNavRecognition.lang = 'en-US';
+        voiceNavRecognition.interimResults = false;
+        voiceNavRecognition.maxAlternatives = 1;
 
-    recognition.addEventListener('result', (e) => {
-        const transcript = e.results[e.results.length - 1][0].transcript.toLowerCase();
-        if (transcript.includes('toggle chat')) toggleChat();
-    });
-}
+        let isVoiceActive = false;
 
-// Updated voice recognition 
-let recognition = null;
-if (window.SpeechRecognition || window.webkitSpeechRecognition) {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = 'en-US';
+        // Voice command processing
+        voiceNavRecognition.addEventListener('result', (event) => {
+            const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase().trim();
+            console.log('Navigation command:', transcript);
 
-    recognition.onstart = () => {
-        document.getElementById('voice-input-btn').classList.add('listening');
-    };
+            if (transcript.includes('end voice navigation')) {
+                voiceNavRecognition.stop();
+                isVoiceActive = false;
+                return;
+            }
 
-    recognition.onend = () => {
-        document.getElementById('voice-input-btn').classList.remove('listening');
-    };
+            // Navigation commands
+            if (transcript.includes('home')) {
+                document.querySelector('#home')?.scrollIntoView({ behavior: 'smooth' });
+            } else if (transcript.includes('about')) {
+                document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' });
+            } else if (transcript.includes('services') || transcript.includes('features')) {
+                document.querySelector('#features')?.scrollIntoView({ behavior: 'smooth' });
+            } else if (transcript.includes('contact')) {
+                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+            } else if (transcript.includes('chat')) {
+                toggleChat();
+            }
+        });
 
-    recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById('user-input').value = transcript;
-    };
+        // Auto-restart listener
+        voiceNavRecognition.addEventListener('end', () => {
+            if (isVoiceActive) voiceNavRecognition.start();
+        });
 
-    recognition.onerror = (event) => {
-        console.error('Speech recognition error:', event.error);
-    };
-}
-
-// Voice button handler
-document.getElementById('voice-input-btn').addEventListener('click', () => {
-    if (!recognition) {
-        alert('Speech recognition is not supported in your browser');
-        return;
-    }
-    
-    try {
-        if (document.getElementById('voice-input-btn').classList.contains('listening')) {
-            recognition.stop();
-        } else {
-            recognition.start();
+        // Voice command button handler
+        const voiceCommandBtn = document.getElementById('voice-command-btn');
+        if (voiceCommandBtn) {
+            voiceCommandBtn.addEventListener('click', () => {
+                if (!isVoiceActive) {
+                    isVoiceActive = true;
+                    voiceNavRecognition.start();
+                    console.log('Voice navigation activated');
+                } else {
+                    isVoiceActive = false;
+                    voiceNavRecognition.stop();
+                    console.log('Voice navigation deactivated');
+                }
+            });
         }
-    } catch (error) {
-        console.error('Speech recognition error:', error);
-    }
-});
-
-// Enter key handler
-document.getElementById('user-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        sendMessage();
     }
 });
 
+// ====================== Chat Voice Input ======================
+let chatVoiceRecognition = null;
 
-//for voice navigation
-window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.SpeechRecognition || window.webkitSpeechRecognition) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        chatVoiceRecognition = new SpeechRecognition();
+        chatVoiceRecognition.continuous = false;
+        chatVoiceRecognition.interimResults = false;
+        chatVoiceRecognition.lang = 'en-US';
 
-if (window.SpeechRecognition) {
-    const recognition = new window.SpeechRecognition();
-    recognition.continuous = true; 
-    recognition.lang = 'en-US';
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
+        // Visual feedback
+        chatVoiceRecognition.onstart = () => {
+            const voiceBtn = document.getElementById('voice-input-btn');
+            if (voiceBtn) voiceBtn.classList.add('listening');
+        };
 
-    let isVoiceActive = false;
+        chatVoiceRecognition.onend = () => {
+            const voiceBtn = document.getElementById('voice-input-btn');
+            if (voiceBtn) voiceBtn.classList.remove('listening');
+        };
 
-    recognition.addEventListener('result', (event) => {
-        const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase().trim();
-        console.log('Voice command:', transcript);
+        // Handle recognition results
+        chatVoiceRecognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            const inputField = document.getElementById('user-input');
+            if (inputField) inputField.value = transcript;
+        };
 
-        if (transcript.includes('end voice navigation')) {
-            recognition.stop();
-            isVoiceActive = false;
-            console.log('Voice navigation deactivated by voice command.');
-            return;
-        }
+        // Error handling
+        chatVoiceRecognition.onerror = (event) => {
+            console.error('Chat voice error:', event.error);
+        };
+    }
 
-    
-        if (transcript.includes('home')) {
-            document.querySelector('#home').scrollIntoView({ behavior: 'smooth' });
-        } else if (transcript.includes('about')) {
-            document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
-        } else if (transcript.includes('services') || transcript.includes('features')) {
-            document.querySelector('#features').scrollIntoView({ behavior: 'smooth' });
-        } else if (transcript.includes('contact')) {
-            document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
-        } else if (transcript.includes('chat')) {
-            toggleChat(); 
-        } else {
-            console.log('Command not recognized:', transcript);
-        }
-    });
+    // Voice input button handler
+    const voiceInputBtn = document.getElementById('voice-input-btn');
+    if (voiceInputBtn) {
+        voiceInputBtn.addEventListener('click', () => {
+            if (!chatVoiceRecognition) {
+                alert('Speech recognition not available');
+                return;
+            }
 
-    recognition.addEventListener('end', () => {
-     
-        if (isVoiceActive) {
-            recognition.start();
-        }
-    });
-
-    document.getElementById('voice-command-btn').addEventListener('click', () => {
-        if (!isVoiceActive) {
-            isVoiceActive = true;
-            recognition.start();
-            console.log('Voice navigation activated.');
-        } else {
-            isVoiceActive = false;
-            recognition.stop();
-            console.log('Voice navigation deactivated.');
-        }
-    });
-    recognition.addEventListener('start', () => {
-        document.getElementById('voice-input-btn').classList.add('listening');
-    });
-
-    recognition.addEventListener('end', () => {
-        document.getElementById('voice-input-btn').classList.remove('listening');
-    });
-} else {
-    console.log('Speech Recognition API not supported in this browser.');
-}
+            try {
+                if (voiceInputBtn.classList.contains('listening')) {
+                    chatVoiceRecognition.stop();
+                } else {
+                    chatVoiceRecognition.start();
+                }
+            } catch (error) {
+                console.error('Voice input error:', error);
+            }
+        });
+    }
+});
 document.addEventListener('DOMContentLoaded', function() {
     // Toggle Team Carousel on "Meet Our Team" button click
     document.querySelectorAll('.meet-team-btn').forEach(button => {
