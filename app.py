@@ -46,6 +46,11 @@ def get_api_key():
 @app.route('/')
 def home():
     return render_template('index.html')
-
+@app.route('/debug-static')
+def debug_static():
+    return jsonify({
+        "css_exists": os.path.exists("static/css/style.css"),
+        "js_exists": os.path.exists("static/js/script.js")
+    })
 if __name__ == '__main__':
     app.run(debug=True)
