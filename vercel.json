@@ -16,11 +16,27 @@
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "dest": "/static/$1",
+      "src": "/static/css/(.*)",
+      "dest": "/static/css/$1",
       "headers": {
-        "Cache-Control": "public, max-age=86400",
-        "Content-Type": "text/css"  // For CSS files
+        "Cache-Control": "public, max-age=31536000",
+        "Content-Type": "text/css"
+      }
+    },
+    {
+      "src": "/static/js/(.*)",
+      "dest": "/static/js/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000",
+        "Content-Type": "application/javascript"
+      }
+    },
+    {
+      "src": "/static/img/(.*)",
+      "dest": "/static/img/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000",
+        "Content-Type": "image/*"
       }
     },
     {
