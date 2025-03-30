@@ -216,7 +216,7 @@ document.getElementById('user-input').addEventListener('keypress', async (e) => 
     }
 });
 
-// ====================== Voice Navigation ======================
+//voice navigation 
 document.addEventListener('DOMContentLoaded', function() {
     window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// ====================== Chat Voice Input ======================
+//Chat Voice Input
 let chatVoiceRecognition = null;
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -288,7 +288,6 @@ document.addEventListener('DOMContentLoaded', function() {
         chatVoiceRecognition.interimResults = false;
         chatVoiceRecognition.lang = 'en-US';
 
-        // Visual feedback
         chatVoiceRecognition.onstart = () => {
             const voiceBtn = document.getElementById('voice-input-btn');
             if (voiceBtn) voiceBtn.classList.add('listening');
