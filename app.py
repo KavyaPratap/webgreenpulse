@@ -32,7 +32,7 @@ def chat():
     
     try:
         response = model.generate_content(
-            f"As a senior care assistant, respond ONLY to these questions about E-Sahara and also answer greetings and give answers in user's language like if question is in hindi,then respond in hindi.: {', '.join(allowed_questions)}. "
+            f"As a senior care assistant, respond ONLY to these questions about E-Sahara and also answer greetings and give answers in user's question's language...: {', '.join(allowed_questions)}. "
             f"For greetings, respond briefly. For any other queries, say: 'I can only answer questions about E-Sahara's services. "
             f"Please ask one of the listed questions.' Current query: {user_message}"
         )
