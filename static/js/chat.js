@@ -37,7 +37,7 @@ function toggleChat() {
 
 function showQuickQuestions() {
     const questionsHTML = quickQuestions.map(q => `
-        <button class="quick-question-btn" onclick="handleQuickQuestion('${q}')">
+        <button class="quick-question-btn" data-question="${q.replace(/"/g, '&quot;')}">
             ${q}
         </button>
     `).join('');
@@ -49,6 +49,14 @@ function showQuickQuestions() {
             <div class="quick-questions-grid">${questionsHTML}</div>
         </div>
     `;
+
+    // Add event listeners for quick questions
+    document.querySelectorAll('.quick-question-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const question = e.target.dataset.question;
+            handleQuickQuestion(question);
+        });
+    });
 }
 
 function handleQuickQuestion(question) {
@@ -56,19 +64,19 @@ function handleQuickQuestion(question) {
     processMessage(question);
 }
 
-async function sendMessage() {
+async function processMessage(message) {
     if (isProcessing) return;
     
     const input = document.getElementById('user-input');
     const messages = document.getElementById('chat-messages');
-    const userText = input.value.trim();
     
-    if (!userText) return;
     isProcessing = true;
     input.disabled = true;
-    messages.innerHTML += `<div class="message user-message">${userText}</div>`;
-    input.value = '';
-    
+
+    // Add user message
+    messages.innerHTML += `<div class="message user-message">${message}</div>`;
+
+    // Add typing indicator
     const typingIndicator = document.createElement('div');
     typingIndicator.className = 'message bot-message typing';
     typingIndicator.textContent = '...';
@@ -76,11 +84,14 @@ async function sendMessage() {
     messages.scrollTop = messages.scrollHeight;
 
     try {
-        const aiResponse = await getAIResponse(userText);
+        const aiResponse = await getAIResponse(message);
         typingIndicator.remove();
+        
+        // Add bot response with typewriter effect
         const responseDiv = document.createElement('div');
         responseDiv.className = 'message bot-message';
         messages.appendChild(responseDiv);
+        
         for (let i = 0; i < aiResponse.length; i++) {
             await new Promise(resolve => setTimeout(resolve, 35));
             responseDiv.textContent = aiResponse.substring(0, i + 1);
@@ -88,7 +99,7 @@ async function sendMessage() {
         }
     } catch (error) {
         typingIndicator.remove();
-        messages.innerHTML += `<div class="message bot-message">Error processing your request. Please try again.</div>`;
+        messages.innerHTML += `<div class="message bot-message">Error processing request. Please try again.</div>`;
     } finally {
         isProcessing = false;
         input.disabled = false;
@@ -96,9 +107,27 @@ async function sendMessage() {
     }
 }
 
-document.getElementById('user-input').addEventListener('keypress', async (e) => {
+// Event Listeners (Updated)
+document.getElementById('user-input').addEventListener('keydown', async (e) => {
     if (e.key === 'Enter' && !e.repeat) {
         e.preventDefault();
-        await sendMessage();
+        const input = document.getElementById('user-input');
+        const message = input.value.trim();
+        if (message) {
+            input.value = '';
+            await processMessage(message);
+        }
     }
 });
+
+document.getElementById('send-btn').addEventListener('click', async () => {
+    const input = document.getElementById('user-input');
+    const message = input.value.trim();
+    if (message) {
+        input.value = '';
+        await processMessage(message);
+    }
+});
+
+// Rename sendMessage to processMessage for consistency
+window.sendMessage = processMessage;
