@@ -167,6 +167,36 @@ function toggleChat() {
     const chat = document.getElementById('chatbot-container');
     isChatOpen = !isChatOpen;
     chat.classList.toggle('chatbot-hidden');
+        if (isChatOpen) showQuickQuestions();
+}
+
+function showQuickQuestions() {
+    const questionsHTML = quickQuestions.map(q => `
+        <button class="quick-question-btn" data-question="${q.replace(/"/g, '&quot;')}">
+            ${q}
+        </button>
+    `).join('');
+
+    const messages = document.getElementById('chat-messages');
+    messages.innerHTML = `
+        <div class="quick-questions">
+            <div class="quick-questions-title">Common Questions:</div>
+            <div class="quick-questions-grid">${questionsHTML}</div>
+        </div>
+    `;
+
+    // Add event listeners for quick questions
+    document.querySelectorAll('.quick-question-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const question = e.target.dataset.question;
+            handleQuickQuestion(question);
+        });
+    });
+}
+
+function handleQuickQuestion(question) {
+    document.querySelector('.quick-questions')?.remove();
+    sendMessage(question);
 }
 
 async function sendMessage() {
