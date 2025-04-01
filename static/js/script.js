@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Chatbot functionality
 let isChatOpen = false;
-let isProcessing = false; 
+let isProcessing = false;
 const quickQuestions = [
     "How does E-Sahara prevent loneliness?",
     "Is registration free for seniors?",
@@ -164,9 +164,7 @@ async function getAIResponse(userMessage) {
         });
 
         if (!response.ok) throw new Error('Network response was not ok');
-        
-        const data = await response.json();
-        return data.response || "I'm sorry, I couldn't generate a response.";
+        return (await response.json()).response || "I'm sorry, I couldn't generate a response.";
     } catch (error) {
         console.error("API error:", error);
         return "Error connecting to AI. Please try again later.";
@@ -177,7 +175,8 @@ function toggleChat() {
     const chat = document.getElementById('chatbot-container');
     isChatOpen = !isChatOpen;
     chat.classList.toggle('chatbot-hidden');
-        if (isChatOpen) showQuickQuestions();
+    
+    if (isChatOpen) showQuickQuestions();
 }
 
 function showQuickQuestions() {
@@ -206,22 +205,22 @@ function showQuickQuestions() {
 
 function handleQuickQuestion(question) {
     document.querySelector('.quick-questions')?.remove();
-    sendMessage(question);
+    processMessage(question);
 }
 
-async function sendMessage() {
+async function processMessage(message) {
     if (isProcessing) return;
     
     const input = document.getElementById('user-input');
     const messages = document.getElementById('chat-messages');
-    const userText = input.value.trim();
     
-    if (!userText) return;
     isProcessing = true;
     input.disabled = true;
-    messages.innerHTML += `<div class="message user-message">${userText}</div>`;
-    input.value = '';
-    
+
+    // Add user message
+    messages.innerHTML += `<div class="message user-message">${message}</div>`;
+
+    // Add typing indicator
     const typingIndicator = document.createElement('div');
     typingIndicator.className = 'message bot-message typing';
     typingIndicator.textContent = '...';
@@ -229,11 +228,14 @@ async function sendMessage() {
     messages.scrollTop = messages.scrollHeight;
 
     try {
-        const aiResponse = await getAIResponse(userText);
+        const aiResponse = await getAIResponse(message);
         typingIndicator.remove();
+        
+        // Add bot response with typewriter effect
         const responseDiv = document.createElement('div');
         responseDiv.className = 'message bot-message';
         messages.appendChild(responseDiv);
+        
         for (let i = 0; i < aiResponse.length; i++) {
             await new Promise(resolve => setTimeout(resolve, 35));
             responseDiv.textContent = aiResponse.substring(0, i + 1);
@@ -241,7 +243,7 @@ async function sendMessage() {
         }
     } catch (error) {
         typingIndicator.remove();
-        messages.innerHTML += `<div class="message bot-message">Error processing your request. Please try again.</div>`;
+        messages.innerHTML += `<div class="message bot-message">Error processing request. Please try again.</div>`;
     } finally {
         isProcessing = false;
         input.disabled = false;
@@ -249,12 +251,28 @@ async function sendMessage() {
     }
 }
 
-document.getElementById('user-input').addEventListener('keypress', async (e) => {
+// Event Listeners (Updated)
+document.getElementById('user-input').addEventListener('keydown', async (e) => {
     if (e.key === 'Enter' && !e.repeat) {
         e.preventDefault();
-        await sendMessage();
+        const input = document.getElementById('user-input');
+        const message = input.value.trim();
+        if (message) {
+            input.value = '';
+            await processMessage(message);
+        }
     }
 });
+
+document.getElementById('send-btn').addEventListener('click', async () => {
+    const input = document.getElementById('user-input');
+    const message = input.value.trim();
+    if (message) {
+        input.value = '';
+        await processMessage(message);
+    }
+});
+window.sendMessage = processMessage;
 
 //voice navigation 
 document.addEventListener('DOMContentLoaded', function() {
