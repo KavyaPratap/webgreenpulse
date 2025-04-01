@@ -144,6 +144,16 @@ document.addEventListener('DOMContentLoaded', function() {
 // Chatbot functionality
 let isChatOpen = false;
 let isProcessing = false; 
+const quickQuestions = [
+    "How does E-Sahara prevent loneliness?",
+    "Is registration free for seniors?",
+    "What types of activities do you offer?",
+    "How to join a virtual event?",
+    "Can I volunteer remotely?",
+    "What devices are supported?",
+    "How to update my profile?",
+    "Emergency contact information"
+];
 
 async function getAIResponse(userMessage) {
     try {
