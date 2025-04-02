@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
     <!--<script src="{{ url_for('static', filename='js/accessibility.js') }}"></script>
     <script src="{{ url_for('static', filename='js/modals.js') }}"></script>
     <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
@@ -47,18 +48,82 @@
     <section id="home">
         <div class="hero-text">
             <h1 class="typewriter-text">Welcome to E-Sahara</h1>
-            <p>Your trusted partner in senior care, lonliness and support services</p>
+            <p>Your trusted partner in senior care, loneliness, and support services</p>
+        </div>
+    
+        <!-- Button to Show Carousel -->
+        <button id="show-aim-carousel">What We Do</button>
+    
+        <!-- Our Aim Carousel (Initially Hidden) -->
+        <div class="aim-carousel-container">
+            <div class="aim-carousel">
+                <div class="aim-carousel-track">
+                    <div class="aim-carousel-item active">
+                        <div class="aim-item-image">
+                            <img src="{{ url_for('static', filename='img/image.jpg') }}" alt="Intergenerational Digital Connections">
+                        </div>
+                        <div class="aim-item-text">
+                            <h3>Intergenerational Digital Connections</h3>
+                            <p>We bridge the gap between generations using innovative digital platforms.</p>
+                        </div>
+                    </div>
+                    <div class="aim-carousel-item">
+                        <div class="aim-item-image">
+                            <img src="{{ url_for('static', filename='img/image.jpg') }}" alt="Meaningful Social Interactions">
+                        </div>
+                        <div class="aim-item-text">
+                            <h3>Meaningful Social Interactions</h3>
+                            <p>Our programs create opportunities for social engagement, ensuring no one feels isolated.</p>
+                        </div>
+                    </div>
+                    <div class="aim-carousel-item">
+                        <div class="aim-item-image">
+                            <img src="{{ url_for('static', filename='img/image.jpg') }}" alt="Community-Building Activities">
+                        </div>
+                        <div class="aim-item-text">
+                            <h3>Community-Building Activities</h3>
+                            <p>We organize a variety of events and activities to bring communities together.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="aim-carousel-dots">
+                    <span class="aim-dot active" data-index="0"></span>
+                    <span class="aim-dot" data-index="1"></span>
+                    <span class="aim-dot" data-index="2"></span>
+                </div>
+            </div>
         </div>
     </section>
-
+    
+    
     <section id="about">
         <div>
-            <h2 class="section-title">About Us</h2>
+           <i> <h2 class="section-title" style="font-size:xx-large; font-weight: 500;">About Us</h2></i>
             <div class="about-content">
-                <img  src="{{ url_for('static', filename='img/image.jpg') }}" alt="Happy seniors" class="about-image">
+                <div class="about-carousel">
+                    <div class="about-carousel-track">
+                      <div class="about-carousel-item active">
+                        <img src="{{ url_for('static', filename='img/image.jpg') }}" alt="About Image 1">
+                      </div>
+                      <div class="about-carousel-item">
+                        <img src="{{ url_for('static', filename='img/about2.jpg') }}" alt="About Image 2">
+                      </div>
+                      <div class="about-carousel-item">
+                        <img src="{{ url_for('static', filename='img/about3.jpg') }}" alt="About Image 3">
+                      </div>
+                      <div class="about-carousel-item">
+                        <img src="{{ url_for('static', filename='img/about4.jpg') }}" alt="About Image 4">
+                      </div>
+                    </div>
+                    <div class="about-carousel-dots">
+                      <span class="about-dot active" data-index="0"></span>
+                      <span class="about-dot" data-index="1"></span>
+                      <span class="about-dot" data-index="2"></span>
+                      <span class="about-dot" data-index="3"></span>
+                    </div>
+                  </div>
                 <div class="about-text">
-                    <p class="visible-text">We are the nobel solution for the problem of lonliness.</p>
-                    <p>We provide personalized care plans tailored to each individual's needs and tackling down lonliness.</p>
+                   
                     <div class="aim-container">
                         <h3 class="aim-heading">Our Aim</h3>
                         <div class="aim-content">
@@ -68,10 +133,11 @@
                                 <li>Meaningful social interactions</li>
                                 <li>Community-building activities</li>
                                 <li>Mental well-being programs</li>
+                                <li>Artificial Intelligence as your assistants</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="collapsible-text">
+                    <div>
                         <!-- add about us in grid layout with field visit image-->
                         <div class="who-we-are">
                             <h3 class="who-heading">Who We Are</h3>
@@ -88,9 +154,7 @@
                             <a  class="meet-team-btn">Meet Our Team</a>
                         </div>
                     </div>
-                    <button class="learn-more-btn about-show-more">
-                        Show More <i class="fas fa-chevron-down"></i>
-                    </button>
+
                 </div>
             </div>
         </div>
@@ -138,7 +202,7 @@
   
 <section id="features">
     <div class="features-container">
-        <h2 class="section-title">Our Services</h2>
+        <h2 class="section-title" style="font-size:xx-large; font-weight: 500;">Our Services</h2>
         <div class="features-grid">
             <!-- First 3 services (always visible) -->
             <div class="feature-card">
@@ -216,7 +280,7 @@
 
 <section id="contact">
     <div>
-        <h2 class="section-title">Contact Us</h2>
+        <h2 class="section-title" style="font-size:xx-large; font-weight: 500;">Contact Us</h2>
         <div class="contact-container">
             <form class="contact-form">
                 <div class="form-group">
@@ -281,6 +345,66 @@
     </div>
   </div>
 </section>
+
+
+<section id="question">   
+        <div class="section-title"><h2 style="font-size:xx-large; font-weight: 500;" >FAQs</h2> </div>
+        <div class="faq-section">
+        <header>
+          <p style="font-size:xx-large; font-weight: 500;">Answers to the most frequently asked questions.</p>
+        </header>
+                 
+        <details name="question">
+            <summary>
+                <span>How many seats do I get in a Team plan?</span>
+                <span class="spanplus">+</span>  
+              </summary>
+          <p>We think of Raycast as a productivity layer that everybody should use to get work done faster. To make it accessible, we don't charge for the individual plan. The plan covers all built-in extensions, such as Clipboard History, Calendar or Window Management and provides access to all public extensions built by our community.</p>
+        </details>
+        
+        <hr>
+        
+        <details name="question">
+            <summary>
+                <span>How many seats do I get in a Team plan?</span>
+                <span class="spanplus">+</span>  
+              </summary>
+          <p>We don't have an exact date right now, but we will launch Raycast for Teams in 2022. You can sign up to get early access above, and be the first to hear when we're launching it.</p>
+        </details> 
+        
+        <hr>
+        
+        <details name="question">
+            <summary>
+                <span>How many seats do I get in a Team plan?</span>
+                <span class="spanplus">+</span>  
+              </summary>
+            
+          <p>We don't have an exact date right now, but we will launch Raycast for Teams in 2022. You can sign up to get early access above, and be the first to hear when we're launching it.</p>
+        </details>
+        
+        <hr>
+        
+        <details name="question">
+            <summary>
+                <span>How many seats do I get in a Team plan?</span>
+                <span class="spanplus">+</span>  
+              </summary>
+          <p>Yes, you can create personal Extensions that are personalized to you, and speed up your productivity, and have team Extensions that can be shared around in your organization for everyone to use. Team Extensions will be available in the Store command, behind a filter for your Team. This is where all of your Team Extensions will live, and where you can install them.</p>
+        </details>
+        
+        <hr>
+        
+        <details name="question">
+            <summary>
+                <span>How many seats do I get in a Team plan?</span>
+                <span class="spanplus">+</span>  
+              </summary>
+          <p>Team features will cost $10 per user, per month.</p>
+        </details>
+        
+      </div>
+</section>
     <!-- Mobile Navigation -->
     <nav class="mobile-nav">
         <a href="#home"><i class="fas fa-home"></i></a>
@@ -334,10 +458,12 @@
             <button id="voice-input-btn" class="voice-btn" title="Voice input">
                 <i class="fas fa-microphone"></i>
             </button>
-            <button onclick="sendMessage()" class="send-btn" title="Send message">
+            <button id="send-btn" onclick="sendMessage()" class="send-btn" title="Send message">
                 <i class="fas fa-paper-plane"></i>
             </button>
+            
         </div>
     </div>
+    
 </body>
 </html>
