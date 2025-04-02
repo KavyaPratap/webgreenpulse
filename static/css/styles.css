@@ -117,7 +117,7 @@ section {
 }
 
 .section-title {
-    font-size: 3.5em;
+    font-size: 2.5em;
     margin-bottom: 1.5em;
     position: relative;
     text-shadow: 2px 2px 4px rgba(218,165,32,0.2);
@@ -148,11 +148,10 @@ section.active .section-title::after {
 .hero-text {
     max-width: 800px;
     margin: 0 auto;
-    font-size: large;
 }
 
 .hero-text h1 {
-    font-size: 4em;
+    font-size: 3em;
     margin-bottom: 0.5em;
     background: linear-gradient(45deg, var(--gold1), var(--gold2));
     -webkit-background-clip: text;
@@ -166,7 +165,6 @@ section.active .section-title::after {
     gap: 50px;
     align-items: center;
     max-height: auto;
-    font-size: 24px;
 }
 
 .about-image {
@@ -200,7 +198,6 @@ section.active .about-image {
     box-shadow: 0 5px 15px rgba(218,165,32,0.1);
     position: relative;
     z-index: 1;
-    font-size: 25px;
 }
 
 .feature-card:hover {
@@ -227,7 +224,6 @@ section.active .about-image {
     pointer-events: none;
     transition: all 0.3s ease;
     z-index: 10;
-    font-size: 22px;
 }
 
 .feature-card:hover .feature-description {
