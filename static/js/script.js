@@ -691,3 +691,39 @@ if (window.SpeechRecognition) {
     console.log('Speech Recognition API is not supported in this browser.');
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const synth = window.speechSynthesis;
+    let utterance; // Store current speech
+
+    // Function to start speaking
+    function speak(text) {
+        stopSpeaking(); // Stop any ongoing speech before starting new one
+
+        utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+
+        // Use Google's voice if available
+        const voices = synth.getVoices();
+        utterance.voice = voices.find(voice => voice.name.includes("Google")) || voices[0];
+
+        synth.speak(utterance);
+    }
+
+    // Function to stop speaking immediately
+    function stopSpeaking() {
+        if (synth.speaking) {
+            synth.cancel(); // Stops speech instantly
+        }
+    }
+
+    // Add event listeners
+    document.getElementById('read-aloud-btn').addEventListener('click', () => {
+        const botMessage = document.getElementById('chat-messages').lastElementChild?.textContent || "No message to read.";
+        speak(botMessage);
+    });
+
+    document.getElementById('stop-voice-btn').addEventListener('click', () => {
+        stopSpeaking();
+        console.log('Speech stopped.');
+    });
+});
