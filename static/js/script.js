@@ -579,3 +579,91 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
     
+// Check for Speech Recognition API support
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (window.SpeechRecognition) {
+    const recognition = new window.SpeechRecognition();
+    recognition.continuous = false;  
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    const synth = window.speechSynthesis; // Text-to-Speech API
+    let isVoiceActive = false;
+
+    // Function to convert chatbot text to speech
+    function speak(text) {
+        if (!synth) return;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        synth.speak(utterance);
+    }
+
+    // Handle voice input
+    recognition.addEventListener('result', async (event) => {
+        const transcript = event.results[0][0].transcript.trim();
+        console.log('User said:', transcript);
+
+        // Process the chatbot response
+        await processMessage(transcript);
+    });
+
+    // Start voice recognition
+    document.getElementById('voice-input-btn').addEventListener('click', () => {
+        if (!isVoiceActive) {
+            isVoiceActive = true;
+            recognition.start();
+            console.log('Voice input activated.');
+        } else {
+            isVoiceActive = false;
+            recognition.stop();
+            console.log('Voice input deactivated.');
+        }
+    });
+
+    // Modify processMessage to speak chatbot responses
+    async function processMessage(message) {
+        if (isProcessing) return;
+
+        const input = document.getElementById('user-input');
+        const messages = document.getElementById('chat-messages');
+
+        isProcessing = true;
+        input.disabled = true;
+
+        // Display user message
+        messages.innerHTML += `<div class="message user-message">${message}</div>`;
+
+        // Typing indicator
+        const typingIndicator = document.createElement('div');
+        typingIndicator.className = 'message bot-message typing';
+        typingIndicator.textContent = '...';
+        messages.appendChild(typingIndicator);
+        messages.scrollTop = messages.scrollHeight;
+
+        try {
+            const aiResponse = await getAIResponse(message);
+            typingIndicator.remove();
+
+            // Display bot response
+            const responseDiv = document.createElement('div');
+            responseDiv.className = 'message bot-message';
+            responseDiv.textContent = aiResponse;
+            messages.appendChild(responseDiv);
+            
+            // Speak chatbot response
+            speak(aiResponse);
+            
+        } catch (error) {
+            typingIndicator.remove();
+            messages.innerHTML += `<div class="message bot-message">Error processing request. Please try again.</div>`;
+        } finally {
+            isProcessing = false;
+            input.disabled = false;
+            messages.scrollTop = messages.scrollHeight;
+        }
+    }
+} else {
+    console.log('Speech Recognition API is not supported in this browser.');
+}
