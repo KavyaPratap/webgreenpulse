@@ -591,13 +591,30 @@ if (window.SpeechRecognition) {
 
     const synth = window.speechSynthesis; // Text-to-Speech API
     let isVoiceActive = false;
+    let utterance; // Store current speech
 
     // Function to convert chatbot text to speech
     function speak(text) {
         if (!synth) return;
-        const utterance = new SpeechSynthesisUtterance(text);
+        
+        // Stop any ongoing speech
+        stopSpeaking();
+
+        utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'en-US';
+
+        // Use a more natural voice if available
+        const voices = synth.getVoices();
+        utterance.voice = voices.find(voice => voice.name.includes("Google")) || voices[0];
+
         synth.speak(utterance);
+    }
+
+    // Function to stop speaking
+    function stopSpeaking() {
+        if (synth.speaking) {
+            synth.cancel();
+        }
     }
 
     // Handle voice input
@@ -620,6 +637,12 @@ if (window.SpeechRecognition) {
             recognition.stop();
             console.log('Voice input deactivated.');
         }
+    });
+
+    // Stop reading button
+    document.getElementById('stop-voice-btn').addEventListener('click', () => {
+        stopSpeaking();
+        console.log('Speech stopped.');
     });
 
     // Modify processMessage to speak chatbot responses
@@ -667,3 +690,4 @@ if (window.SpeechRecognition) {
 } else {
     console.log('Speech Recognition API is not supported in this browser.');
 }
+
