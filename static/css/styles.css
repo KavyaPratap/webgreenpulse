@@ -286,6 +286,7 @@ section.active .about-image {
     .feature-card:nth-child(4) { grid-area: card4; }
     .feature-card:nth-child(5) { grid-area: card5; }
     .feature-card:nth-child(6) { grid-area: card6; }
+    
 
     .feature-card {
         height: 100%;
@@ -1576,4 +1577,18 @@ input:focus, textarea:focus {
 }
 .pen-pal-icon {
     color: #FFD700; /* Gold color */
+}
+
+.music-icon{
+    color: #FFD700;
+}
+.feature-icon {
+    font-size: 3em; /* Adjust size */
+    color: #FFD700; /* Gold color */
+}
+
+/* If you are using Font Awesome Solid icons */
+.feature-card i {
+    font-size: 3em !important; /* Override default size */
+    color: #FFD700 !important; /* Ensure yellow color */
 }
